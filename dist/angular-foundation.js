@@ -72,7 +72,7 @@
      * angular-foundation-6
      * http://circlingthesun.github.io/angular-foundation-6/
     
-     * Version: 0.11.21 - 2018-07-10
+     * Version: 0.11.22 - 2019-01-22
      * License: MIT
      * (c) 
      */
@@ -3025,11 +3025,16 @@
                                 ttHeight = tooltip.prop('offsetHeight');
 
                                 var scrollTop = $window.pageYOffset;
+
                                 if (scope.tt_placement === 'top' && position.top - scrollTop - ttHeight - 20 < 0) {
                                     scope.tt_placement = 'bottom';
                                 }
 
                                 var tt_remSize = parseFloat(getComputedStyle(tooltip[0]).fontSize);
+
+                                var width = element[0].offsetWidth;
+                                width = width || element[0].getBBox().width * 2;
+
                                 // Calculate the tooltip's top and left coordinates to center it with
                                 // this directive.
                                 switch (scope.tt_placement) {
@@ -3042,7 +3047,7 @@
                                     case 'bottom':
                                         ttPosition = {
                                             top: position.top + position.height + 10,
-                                            left: position.left - 2.25 * tt_remSize + element[0].offsetWidth / 2
+                                            left: position.left - 2.25 * tt_remSize + width / 2
                                         };
                                         break;
                                     case 'left':
@@ -3055,7 +3060,7 @@
                                         //top
                                         ttPosition = {
                                             top: position.top - ttHeight - 10,
-                                            left: position.left - 2.25 * tt_remSize + element[0].offsetWidth / 2
+                                            left: position.left - 2.25 * tt_remSize + width / 2
                                         };
                                         break;
                                 }
